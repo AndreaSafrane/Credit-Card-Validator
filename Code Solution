@@ -1,0 +1,30 @@
+#Input Format
+#A string containing the credit card number you need to verify.
+
+#Output Format
+#A string: 'valid' in case the input is a valid credit card number (passes the Luhn test and is 16 digits long), or 'not valid', if it's not.
+
+card_num = input()
+card_num = list(card_num)
+    
+card_num = card_num[::-1]
+
+card_num = [int(i) for i in card_num]
+
+mult = [j * 2 for i, j in enumerate(card_num) if i % 2 != 0]
+        
+card_num = card_num[::2]
+
+for i in card_num:
+    if i > 9:
+        i = i - 9
+
+for i in mult:
+    if i > 9:
+        i = i - 9
+    card_num.append(i)
+
+if sum(card_num) % 10 == 0 and len(card_num) == 16:
+    print("valid")
+else:
+    print("not valid")
